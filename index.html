@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Js-Handson</h2>
+    <p>&cir; Promise Async Await</p>
+    <h3>1.Write one example explaining how you can write a callback function.</h3>
+    <h4>
+        <pre>
+            function doSomething(callback) {
+              let result = 2 + 2;
+              callback(result);
+            }
+        function callbackFunction(result) {
+        console.log(`The result is ${result}`);
+        }
+        doSomething(callbackFunction);      
+        </pre>
+    </h4>
+    <h3>2."Write a callback function to print numbers from 1 to 7, in which 1 should be printed after 1 sec, 2 should be printed after 2 sec, 3 should be printed after 3 sec, and so on. 
+    1 2 3 4 5 6 7</h3>
+    <h4><pre>
+        function printNumbersWithDelay(num, delay, callback) {
+            let counter = 1;
+            const interval = setInterval(() => {
+              console.log(counter);
+              counter++;
+              if (counter > num) {
+                clearInterval(interval);
+                callback();
+              }
+            }, delay);
+          }
+          function callbackFunction() {
+            console.log("All done!");
+          }
+          printNumbersWithDelay(7, 1000, callbackFunction);          
+    </pre></h4>
+    <h3>3."Write the promise function to print numbers from 1 to 7, in which 1 should be printed after 1 sec, 2 should be printed after 2 sec, 3 should be printed after 3 sec, and so on.<br> 
+        Numbers 1 2 3 4 5 6 7</h3>
+    <h4><pre>
+        function printNumbersWithDelay(num, delay) {
+            let counter = 1;
+            return new Promise((resolve, reject) => {
+              const interval = setInterval(() => {
+                console.log(counter);
+                counter++;
+                if (counter > num) {
+                  clearInterval(interval);
+                  resolve();
+                }
+              }, delay);
+            });
+          }
+          printNumbersWithDelay(7, 1000)
+            .then(() => {
+              console.log("All done!");
+            })
+            .catch((error) => {
+              console.error(error);
+            });          
+    </pre></h4>
+    <h3>4."Create a promise function accepting an argument, if yes is passed to the function then it should go to resolved state and print Promise Resolved, and if nothing is passed 
+            then it should go to reject the state and catch the error and print Promise Rejected "</h3>
+    <h4><pre>
+        function func(txt) {
+            return new Promise((resolve, reject) => {
+              if (txt === 'yes') {
+                resolve("Promise resolved");
+              } else {
+                reject("Promise rejected");
+              }
+            });
+          }
+          func('yes')
+            .then((result) => console.log(result))
+            .catch((err) => console.log(err));
+          </pre></h4>
+    <h3>5.Create examples to explain callback function</h3>
+    <h4>Example 1: A simple callback function</h4>  
+    <h4><pre> 
+        function greet(name, callback) {
+            console.log(`Hello, ${name}!`);
+            callback();
+          }
+          
+          function sayGoodbye() {
+            console.log("Goodbye!");
+          }
+          
+          greet("Hy", sayGoodbye)          
+        </pre></h4>
+     <h4>Example 2: A callback function with arguments</h4>
+     <h4><pre>
+        function multiply(a, b, callback) {
+            const result = a * b;
+            callback(result);
+          }
+          
+          function logResult(result) {
+            console.log(`The result is ${result}.`);
+          }
+          
+          multiply(3, 4, logResult);          
+     </pre></h4>
+     <h4>Example 3: A callback function with anonymous function syntax</h4>
+     <h4><pre>
+        function doSomething(callback) {
+            console.log("Doing something...");
+            callback();
+          }
+          
+          doSomething(function() {
+            console.log("Done!");
+          });          
+     </pre></h4>
+    <h3>6.Create examples to explain callback hell function</h3>
+    <h4><pre>
+        getUser(userId, (user) => {
+            getPermissions(user, (permissions) => {
+              if (permissions.canAccessDashboard) {
+                getDashboardData(user, (dashboardData) => {
+                  renderDashboard(dashboardData);
+                });
+              } else {
+                alert("You don't have permission to access the dashboard.");
+              }
+            });
+          });
+          
+    </pre></h4>
+    <h3>7.Create examples to explain promises function</h3>
+        <h4>Example 1: Resolving a Promise</h4>
+        <h4> <pre>const promise = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                  resolve("Task completed successfully!");
+                }, 3000);
+              });
+              
+              promise.then((result) => {
+                console.log(result);
+              });
+              </pre>
+        </h4>
+        <h4>Example 2: Rejecting a Promise</h4>
+        <h4><pre>
+            const promise = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                  reject("Task failed!");
+                }, 3000);
+              });
+              
+              promise.catch((error) => {
+                console.log(error);
+              });
+        </pre></h4>
+        <h4>Example 3: Chaining Promises</h4>
+        <h4><pre>
+            const promise1 = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                  resolve("Task 1 completed successfully!");
+                }, 3000);
+              });
+              
+              const promise2 = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                  resolve("Task 2 completed successfully!");
+                }, 5000);
+              });
+              
+              promise1.then((result) => {
+                console.log(result);
+                return promise2;
+              }).then((result) => {
+                console.log(result);
+              });              
+        </pre></h4>
+    <h3>8.Create examples to explain async await function</h3>
+    <h4>Example 1: Resolving a Promise with async/await</h4>
+    <h4>
+        <pre>
+            async function myFunction() {
+                const result = await new Promise((resolve) => {
+                  setTimeout(() => {
+                    resolve("Task completed successfully!");
+                  }, 3000);
+                });
+              
+                console.log(result);
+              }
+              
+              myFunction();
+        </pre>
+    </h4>
+    <h4>Example 2: Handling Promise rejection with async/await</h4>
+    <h4><pre>
+        async function myFunction() {
+            try {
+              const result = await new Promise((resolve, reject) => {
+                setTimeout(() => {
+                  reject("Task failed!");
+                }, 3000);
+              });
+          
+              console.log(result);
+            } catch (error) {
+              console.log(error);
+            }
+          }
+          myFunction();
+    </pre></h4>
+    <h3>Example 3: Chaining Promises with async/await</h3>
+    <h4><pre>
+        async function myFunction() {
+            try {
+              const result1 = await new Promise((resolve) => {
+                setTimeout(() => {
+                  resolve("Task 1 completed successfully!");
+                }, 3000);
+              });
+              console.log(result1);
+              const result2 = await new Promise((resolve) => {
+                setTimeout(() => {
+                  resolve("Task 2 completed successfully!");
+                }, 5000);
+              });
+          
+              console.log(result2);
+            } catch (error) {
+              console.log(error);
+            }
+          }
+          
+          myFunction();          
+    </pre></h4>
+    <h3>9.Create examples to explain promise.all function</h3>
+    <h4>Example 1: Basic usage of Promise.all()</h4>
+    <h4><pre>
+        const promise1 = Promise.resolve(1);
+        const promise2 = Promise.resolve(2);
+        const promise3 = Promise.resolve(3);
+
+        Promise.all([promise1, promise2, promise3])
+        .then(values => console.log(values))
+        .catch(error => console.log(error));
+    </pre></h4>
+    <h4>Example 2: Using Promise.all() with mixed Promises</h4>
+    <h4><pre>
+        const promise1 = Promise.resolve(1);
+        const promise2 = Promise.reject('Error');
+        const promise3 = Promise.resolve(3);
+        Promise.all([promise1, promise2, promise3])
+        .then(values => console.log(values))
+        .catch(error => console.log(error));
+    </pre></h4>
+    
+</body>
+</html>

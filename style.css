@@ -1,0 +1,21 @@
+p{
+    color:cadetblue;
+    font-family: cursive;
+    font-weight: bold;
+}
+h2{
+    text-decoration: underline;
+    color: crimson;
+    text-shadow: 2px 2px 2px rgb(211, 166, 166);
+}
+ pre{
+    /* font-size: large; */
+    /* font-family:'Times New Roman', Times, serif; */
+    color:black;
+ }
+h3{
+    color:crimson;
+}
+h4{
+    color:teal;
+}
